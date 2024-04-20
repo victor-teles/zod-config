@@ -28,10 +28,11 @@ export const writeConfig = async <T extends AnyZodObject>(
   model: z.infer<T>,
   config: Config<T>,
 ): Promise<z.infer<T>> => {
+  const { adapters } = config;
   // Validate data against schema
   const data = validateSchema(config, model);
 
-  await writeDataToAdapters(data);
+  await writeDataToAdapters(data, Array.isArray(adapters) ? adapters : adapters ? [adapters] : [],);
 
   return data;
 };
@@ -73,8 +74,7 @@ const getDataFromAdapters = async (adapters?: Adapter[]) => {
         return await adapter.read();
       } catch (error) {
         console.warn(
-          `Cannot read data from ${adapter.name}: ${
-            error instanceof Error ? error.message : error
+          `Cannot read data from ${adapter.name}: ${error instanceof Error ? error.message : error
           }`,
         );
         return {};
