@@ -1,6 +1,6 @@
 import { parse } from "dotenv";
 import { readFile } from "fs/promises";
-import { Adapter } from "../../../types";
+import type { Adapter } from "../../../types";
 import { filterByPrefixKey } from "../utils";
 
 export type DotEnvAdapterProps = {

@@ -21,9 +21,6 @@
       "recommended": true,
       "correctness": {
         "noUnusedVariables": "error"
-      },
-      "nursery": {
-        "noUnusedImports": "error"
       }
     }
   },

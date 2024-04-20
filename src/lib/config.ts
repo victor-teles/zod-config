@@ -1,5 +1,5 @@
-import { AnyZodObject, z } from "zod";
-import { Adapter, Config } from "../types";
+import type { AnyZodObject, z } from "zod";
+import type { Adapter, Config } from "../types";
 import { deepMerge } from "./adapters/utils";
 
 /**
@@ -29,12 +29,12 @@ export const writeConfig = async <T extends AnyZodObject>(
   config: Config<T>,
 ): Promise<z.infer<T>> => {
   // Validate data against schema
-  const data = validateSchema(config, model)
+  const data = validateSchema(config, model);
 
-  await writeDataToAdapters(data)
+  await writeDataToAdapters(data);
 
   return data;
-}
+};
 
 const validateSchema = <T extends AnyZodObject>(config: Config<T>, data: any) => {
   const { schema, onError, onSuccess } = config;
@@ -57,8 +57,8 @@ const validateSchema = <T extends AnyZodObject>(config: Config<T>, data: any) =>
     onSuccess(result.data);
   }
 
-  return result.data
-}
+  return result.data;
+};
 
 const getDataFromAdapters = async (adapters?: Adapter[]) => {
   // If no adapters are provided, we will read from process.env
@@ -73,7 +73,8 @@ const getDataFromAdapters = async (adapters?: Adapter[]) => {
         return await adapter.read();
       } catch (error) {
         console.warn(
-          `Cannot read data from ${adapter.name}: ${error instanceof Error ? error.message : error
+          `Cannot read data from ${adapter.name}: ${
+            error instanceof Error ? error.message : error
           }`,
         );
         return {};
@@ -85,7 +86,10 @@ const getDataFromAdapters = async (adapters?: Adapter[]) => {
   return deepMerge({}, ...promiseResult);
 };
 
-const writeDataToAdapters = async <T extends AnyZodObject>(data: z.infer<T>, adapters?: Adapter[]) => {
+const writeDataToAdapters = async <T extends AnyZodObject>(
+  data: z.infer<T>,
+  adapters?: Adapter[],
+) => {
   if (!adapters || adapters.length === 0) {
     return;
   }
@@ -96,8 +100,7 @@ const writeDataToAdapters = async <T extends AnyZodObject>(data: z.infer<T>, ada
         return await adapter.write(data);
       } catch (error) {
         console.warn(
-          `Cannot write data to ${adapter.name}: ${error instanceof Error ? error.message : error
-          }`,
+          `Cannot write data to ${adapter.name}: ${error instanceof Error ? error.message : error}`,
         );
         return {};
       }

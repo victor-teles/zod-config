@@ -1,4 +1,4 @@
-import { Adapter } from "../../../types";
+import type { Adapter } from "../../../types";
 import { filterByPrefixKey } from "../utils";
 import { readFile, writeFile } from "fs/promises";
 

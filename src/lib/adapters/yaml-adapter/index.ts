@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import yaml from 'js-yaml';
-import { Adapter } from "../../../types";
+import type { Adapter } from "../../../types";
 import { filterByPrefixKey } from "../utils";
 
 export type YamlAdapterProps = {
