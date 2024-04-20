@@ -20,5 +20,6 @@ export const envAdapter = ({ customEnv, prefixKey }: EnvAdapterProps = {}): Adap
 
       return data;
     },
+    write: () => Promise.resolve()
   };
 };

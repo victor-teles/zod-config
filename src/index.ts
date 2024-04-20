@@ -1,2 +1,2 @@
 export type { Adapter, Config } from "./types";
-export { loadConfig } from "./lib/config";
+export { loadConfig, writeConfig } from "./lib/config";

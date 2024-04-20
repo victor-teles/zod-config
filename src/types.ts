@@ -3,6 +3,7 @@ import { z } from "zod";
 export type Adapter = {
   name: string;
   read: () => Promise<z.infer<z.AnyZodObject>>;
+  write: (model: z.infer<z.AnyZodObject>) => Promise<void>;
 };
 
 export type Config<T extends z.AnyZodObject = z.AnyZodObject> = {

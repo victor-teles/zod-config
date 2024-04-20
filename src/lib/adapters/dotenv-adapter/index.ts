@@ -32,5 +32,6 @@ export const dotEnvAdapter = ({ path, prefixKey }: DotEnvAdapterProps): Adapter 
         );
       }
     },
+    write: () => Promise.resolve()
   };
 };
