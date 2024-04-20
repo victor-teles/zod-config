@@ -1,6 +1,6 @@
 {
   "name": "zod-store",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Load configuration variables from multiple sources with flexible adapters, ensuring type safety with Zod.",
   "author": "Alexandre Marques",
   "license": "MIT",
@@ -48,6 +48,18 @@
       "import": "./dist/dotenv-adapter.mjs",
       "module": "./dist/dotenv-adapter.mjs",
       "require": "./dist/dotenv-adapter.js"
+    },
+    "./yaml-adapter": {
+      "types": "./dist/yaml-adapter.d.ts",
+      "import": "./dist/yaml-adapter.mjs",
+      "module": "./dist/yaml-adapter.mjs",
+      "require": "./dist/yaml-adapter.js"
+    },
+    "./localStorage-adapter": {
+      "types": "./dist/localStorage-adapter.d.ts",
+      "import": "./dist/localStorage-adapter.mjs",
+      "module": "./dist/localStorage-adapter.mjs",
+      "require": "./dist/localStorage-adapter.js"
     }
   },
   "typesVersions": {
@@ -60,6 +72,12 @@
       ],
       "dotenv-adapter": [
         "./dist/dotenv-adapter.d.ts"
+      ],
+      "yaml-adapter": [
+        "./dist/yaml-adapter.d.ts"
+      ],
+      "localStorage-adapter": [
+        "./dist/localStorage-adapter.d.ts"
       ]
     }
   },
