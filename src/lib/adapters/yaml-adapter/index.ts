@@ -1,7 +1,8 @@
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile, mkdir, access } from 'fs/promises';
 import yaml from 'js-yaml';
 import type { Adapter } from "../../../types";
 import { filterByPrefixKey } from "../utils";
+import { parse } from 'path'
 
 export type YamlAdapterProps = {
   path: string;
@@ -33,6 +34,13 @@ export const yamlAdapter = ({ path, prefixKey }: YamlAdapterProps): Adapter => {
     write: async (model) => {
       try {
         const data = yaml.dump(model)
+        const parsedPath = parse(path)
+        const exists = await access(path)
+          .then(() => true)
+          .catch(() => false);
+
+        if (!exists)
+          await mkdir(parsedPath.dir, { recursive: true });
 
         await writeFile(path, data)
       } catch (error) {
